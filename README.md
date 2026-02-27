@@ -1,16 +1,103 @@
-# React + Vite
+# HEM∆ — Blood Management Network
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+HEM∆ is a premium, real-time blood management platform designed to streamline the lifecycle of blood products from donation to transfusion. It connects donors, hospitals, and blood banks through a unified, high-performance interface.
 
-Currently, two official plugins are available:
+## 🚀 Teammate Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This repository currently contains the **Frontend** implementation of the HEM∆ platform. The UI is built with a focus on premium aesthetics, smooth animations (Framer Motion), and data-driven dashboards.
 
-## React Compiler
+### 🛠 Tech Stack
+- **Framework:** React 18+ (via Vite)
+- **Styling:** Vanilla CSS (CSS Variables) + Framer Motion
+- **Icons:** Lucide React
+- **Charts:** Recharts
+- **Navigation:** React Router DOM v6
+- **Asset Management:** Static assets (like `kerala-map.png`) are located in `/public`.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🏗 Project Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```text
+frontend/
+├── public/                 # Static assets (maps, logos)
+├── src/
+│   ├── assets/             # Global styles and branding
+│   ├── components/         # Reusable UI components
+│   │   ├── admin/          # Admin-specific layouts
+│   │   ├── donor/          # Donor portal elements
+│   │   ├── hospital/       # Hospital portal elements
+│   │   └── bloodbank/      # Blood bank portal elements
+│   ├── pages/              # Portal pages & Landing pages
+│   │   ├── admin/          # 15+ Advanced Admin screens
+│   │   ├── donor/          # Donor portal screens
+│   │   ├── hospital/       # Hospital portal screens
+│   │   └── bloodbank/      # Blood bank portal screens
+│   ├── data/               # Mock data & Analytics seeds
+│   └── App.jsx             # Main router
+└── ...
+```
+
+---
+
+## 🔑 Portals & Access
+
+| Portal | Base Route | Key Features |
+|---|---|---|
+| **Admin** | `/admin/*` | Global inventory, hospital/bank approvals, audit logs, reports, system settings. |
+| **Blood Bank** | `/bloodbank/*` | Local stock management, donation intake, health checks, issue management. |
+| **Hospital** | `/hospital/*` | Blood requests, patient tracking, order history, billing & payments. |
+| **Donor** | `/donor/*` | Schedule donations, health check history, nearby blood bank discovery. |
+
+---
+
+## 🎨 Design System
+
+We use a specific "Dark Premium" design language:
+- **Red (Primary):** `var(--red)` (`#D90025`)
+- **Background:** `var(--bg)` (`#0A0A12`)
+- **Card Background:** `var(--card)` (`#0F0F17`)
+- **Typography:** Satoshi (Headings) & Inter (Body)
+- **Animations:** Use `motion.div` for page transitions (typically `initial={{ opacity: 0, y: 16 }}`).
+
+---
+
+## 📊 Mock Data System
+
+The frontend is currently driven by a comprehensive mock data system located in `src/data/`.
+- `mockData.js`: Core data for users, hospitals, and blood banks.
+- `adminMockData.js`: Advanced data for admin analytics, audit logs, and system-wide tracking.
+
+*Note: Use these to populate UI components until the backend API integration phase.*
+
+---
+
+## 📍 Geographical Integration
+
+The **Kerala Network Map** (`kerala-map.png`) is used in the Admin Dashboard and Donor "Find Bank" pages. It is styled with CSS filters (`sepia`, `brightness`, `hue-rotate`) to align with the dark theme without requiring custom SVG manipulation for every update.
+
+---
+
+## 🚦 Getting Started
+
+1. **Install Dependencies:**
+   ```bash
+   cd frontend
+   npm install
+   ```
+
+2. **Run Development Server:**
+   ```bash
+   npm run dev
+   ```
+
+3. **Login Redirection:**
+   The `Login.jsx` component is configured to redirect users based on their selected role. Admin portal entry is via `/admin/dashboard`.
+
+---
+
+## 📝 Roadmap
+- [x] Phase 1-5: Portal UI Development
+- [x] Phase 6: Admin Portal & System Settings
+- [ ] Phase 7: Backend API Integration
+- [ ] Phase 8: Real-time Notification System (WebSockets)
