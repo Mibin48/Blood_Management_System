@@ -43,8 +43,24 @@ router.post('/', (req, res) => {
 router.get('/', (req, res) => {
 
     const query = `
-        SELECT * FROM blood_request
-        ORDER BY request_date DESC
+        SELECT 
+            br.request_id,
+            br.hospital_id,
+            h.hospital_name,
+            br.patient_id,
+            p.name AS patient_name,
+            br.bank_id,
+            p.blood_group,
+            br.units_required,
+            br.request_date,
+            br.status,
+            'Routine' AS priority
+        FROM blood_request br
+        JOIN hospital h 
+            ON br.hospital_id = h.hospital_id
+        JOIN patient p 
+            ON br.patient_id = p.patient_id
+        ORDER BY br.request_date DESC
     `;
 
     db.query(query, (err, results) => {
@@ -60,5 +76,24 @@ router.get('/', (req, res) => {
     });
 });
 
+router.put("/:id/status", async (req, res) => {
+  const { status } = req.body;
+  const requestId = req.params.id;
+
+  try {
+    const [result] = await db.query(
+      "UPDATE blood_request SET status = ? WHERE request_id = ?",
+      [status, requestId]
+    );
+
+    res.json({
+      message: "Request status updated",
+      affectedRows: result.affectedRows
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to update request status" });
+  }
+});
 
 module.exports = router;

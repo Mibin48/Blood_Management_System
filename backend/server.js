@@ -16,7 +16,7 @@ const healthCheckRoutes = require("./routes/healthCheckRoutes");
 app.use("/health-checks", healthCheckRoutes);
 
 const bloodBankRoutes = require("./routes/bloodBankRoutes");
-app.use("/blood-bank", bloodBankRoutes);
+app.use("/blood-banks", bloodBankRoutes);
 
 // ✅ NEW: Blood Request Routes
 const bloodRequestRoutes = require("./routes/bloodRequestRoutes");
